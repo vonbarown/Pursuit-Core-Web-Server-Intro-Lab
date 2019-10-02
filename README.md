@@ -9,7 +9,7 @@ Build a simple version of the [random user API](https://randomuser.me/api/?inc=g
 When you hit the server, it should return the following JSON
 
 <details>
-  <summary>JSON></summary>
+  <summary>JSON</summary>
 
 ```js
 {
