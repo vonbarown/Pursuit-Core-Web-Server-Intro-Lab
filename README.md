@@ -1,6 +1,6 @@
 # Pursuit-Core-Web-Server-Intro-Lab
 
-## Problem One - RandomUser Server Clone
+## Problem One - Random User Generator Server Clone
 
 ### Make the server
 
