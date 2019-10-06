@@ -13,8 +13,10 @@ async function loadDataFromServer() {
 }
 
 function displayResponseFromServer(data) {
+    clearScreen()
     console.log(data.results[0].name.title)
 
+    let cardContainer = document.querySelector('#cardContainer')
     data.results.forEach(el => {
         let card = document.createElement('div');
         let container = document.createElement('div');
@@ -27,18 +29,23 @@ function displayResponseFromServer(data) {
 
         console.log(el);
 
-        let title = document.createElement('p')
-        let first = document.createElement('strong')
+        let nationality = document.createElement('p')
         let lastName = document.createElement('p')
-        let titleAndFirstName = document.createElement('p')
+        let titleAndFirstName = document.createElement('h3')
 
-        first.innerText = el.name.first
-        title.innerText = `${el.name.title}: `
-        title.append(first)
+        titleAndFirstName.innerText = `${el.name.title}: ${el.name.first}`
         lastName.innerText = el.name.last
+        nationality.innerText = `Nationality: ${el.nat}`
 
-        container.append(img, title, lastName);
+        container.append(img, titleAndFirstName, lastName, nationality);
         card.appendChild(container)
-        document.body.appendChild(card)
+        cardContainer.appendChild(card)
     });
+}
+
+const clearScreen = () => {
+    let container = document.querySelector('#cardContainer')
+    while (container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
 }
