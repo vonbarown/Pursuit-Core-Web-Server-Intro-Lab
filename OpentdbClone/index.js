@@ -70,6 +70,7 @@ const question = (data) => {
     let questionContainer = document.querySelector('#questionContainer')
 
     let questionTag = document.createElement('p');
+    questionTag.id = 'currentQuestion'
     let category = document.createElement('p');
     let difficulty = document.createElement('p');
     let results = document.createElement('p');
