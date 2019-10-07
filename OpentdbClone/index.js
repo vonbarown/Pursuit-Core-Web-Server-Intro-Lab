@@ -2,20 +2,19 @@ let select;
 let correctOption;
 let currQues = -1;
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    getServerButton().addEventListener('click', loadDataFromServer)
-    // multipleChoice()
+    getServerButton().addEventListener('click', multipleChoice)
+
+    let nextButton = document.querySelector('#next')
+    nextButton.addEventListener('click', loadDataFromServer)
 })
 
-function getServerButton() {
-    return document.querySelector("#serverButton")
-}
+const getServerButton = () => document.querySelector("#serverButton")
+
 
 async function loadDataFromServer() {
     const myURL = "http://localhost:3000/"
     const resp = await axios.get(myURL)
-    // return resp.data.results
 
     displayResponseFromServer(resp.data.results)
 }
@@ -23,15 +22,9 @@ async function loadDataFromServer() {
 function displayResponseFromServer(response) {
     console.log(response)
     getAnswers(response)
-    let select = document.querySelector('select')
-    select.addEventListener('change', () => {
-        multipleChoice()
-    })
-    // question(response)
-    // multipleChoice()
 }
 
-const getAnswers = async (data) => {
+const getAnswers = (data) => {
     clearScreen()
     iterateQuestion(data)
     // console.log(data);
@@ -43,15 +36,13 @@ const getAnswers = async (data) => {
     });
     console.log(currQues);
     let shuffledArray = shuffleAnswers(answersArray)
-    shuffledArray.forEach(el => {
-        createOptions(el);
-    })
+    shuffledArray.forEach(el => createOptions(el));
+
     question(data)
 }
 
 const createOptions = (el) => {
     select = document.querySelector('select');
-    console.log();
     let options = document.createElement('option');
     options.value = el;
     options.innerText = el;
@@ -62,13 +53,10 @@ const getSelectedChoice = select => select.options[select.selectedIndex];
 
 const iterateQuestion = (data) => currQues === data.length - 1 ? currQues = 0 : currQues++;
 
-const shuffleAnswers = (arr) => {
-    return arr.sort(() => Math.random() - 0.5);
-}
+const shuffleAnswers = (arr) => arr.sort(() => Math.random() - 0.5);
 
 const question = (data) => {
     let questionContainer = document.querySelector('#questionContainer')
-
     let questionTag = document.createElement('p');
     questionTag.id = 'currentQuestion'
     let category = document.createElement('p');
