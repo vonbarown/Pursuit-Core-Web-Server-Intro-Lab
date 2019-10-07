@@ -3,6 +3,7 @@ let correctOption;
 let currQues = -1;
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadDataFromServer()
     getServerButton().addEventListener('click', multipleChoice)
 
     let nextButton = document.querySelector('#next')
