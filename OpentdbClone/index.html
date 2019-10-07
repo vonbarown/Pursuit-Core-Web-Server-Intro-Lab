@@ -13,9 +13,13 @@
 
 <body>
     <h1>Choose the right answer</h1>
-    <select name="" id=""></select>
+    <form event.preventDefault()>
+        <label for="answersSelect">Choices: </label>
+        <select name="answers" id="answersSelect"></select>
+    </form>
     <div id="questionContainer"></div>
-    <button id="serverButton">Get Users</button>
+    <!-- <p id="results"></p> -->
+    <button id="serverButton">Next Question</button>
 </body>
 
 </html>
