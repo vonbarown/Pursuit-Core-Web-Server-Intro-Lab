@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDataFromServer()
     getServerButton().addEventListener('click', multipleChoice)
 
+    getServerButton().disabled = false;
+
     let nextButton = document.querySelector('#next')
     nextButton.addEventListener('click', loadDataFromServer)
 })
@@ -16,7 +18,7 @@ const getServerButton = () => document.querySelector("#serverButton")
 async function loadDataFromServer() {
     const myURL = "http://localhost:3000/"
     const resp = await axios.get(myURL)
-
+    getServerButton().disabled = false;
     displayResponseFromServer(resp.data.results)
 }
 
@@ -32,9 +34,7 @@ const getAnswers = (data) => {
     let answersArray = []
     correctOption = data[currQues].correct_answer
     answersArray.push(data[currQues].correct_answer)
-    data[currQues].incorrect_answers.forEach(element => {
-        answersArray.push(element)
-    });
+    data[currQues].incorrect_answers.forEach(element => answersArray.push(element));
     console.log(currQues);
     let shuffledArray = shuffleAnswers(answersArray)
     shuffledArray.forEach(el => createOptions(el));
@@ -79,6 +79,7 @@ const multipleChoice = () => {
     console.log(opt);
     opt.value === correctOption ? results.innerText = `Congratulations you chose the correct answer: ${correctOption}` :
         results.innerText = `You chose the incorrect answer! \nThe correct answer is: ${correctOption}`;
+    getServerButton().disabled = true;
 }
 
 const clearScreen = () => {
